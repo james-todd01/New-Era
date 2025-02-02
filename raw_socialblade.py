@@ -1,17 +1,14 @@
 import time
-from helium import *
-from selenium import webdriver
+from helium import set_driver, Text, Button, click
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
-
 from seleniumbase import SB
 
 try:
     with SB(uc=True, incognito=False) as sb:
         driver = sb.driver
-    
         # Open the Xfinity login page (or any page you want to scrape)
         url = "https://login.xfinity.com/login"
         sb.driver.uc_open_with_reconnect(url, 3)
@@ -42,16 +39,18 @@ try:
                     # driver.save_screenshot(screenshot_path)
                     driver.find_element(By.ID, 'sign_in').click()
                     time.sleep(1)
+                    s_text = 'The Xfinity ID you entered was incorrect. Please try again.'
                     if driver.title == "Please reset your Xfinity password":
                         print("Inactive ID detected")
                     elif Text("Enter your password").exists():
                         print("Active ID detected")
-                    elif Text('The Xfinity ID you entered was incorrect. Please try again.').exists():
+                    elif Text(s_text).exists():
                         print("Suspicious ID detected")
                     else:
                         print("Throttling Detected")
                         count -= 1
             except Exception as error:
+                print(error)
                 time.sleep(4)
                 if Button("Decline All").exists():
                     click(Button("Decline All"))
