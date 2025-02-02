@@ -61,4 +61,4 @@ try:
                 if Button("Decline All").exists():
                     click(Button("Decline All"))
 except Exception as e_rror:
-    print(f'Thread {thread_name} error ocuured.Error: {e_rror}'
+    print(f'Thread error ocuured.Error: {e_rror}')
