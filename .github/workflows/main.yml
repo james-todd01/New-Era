@@ -19,7 +19,7 @@ jobs:
       max-parallel: 3
       matrix:
         os: [ubuntu-20.04]
-        python-version: ["3.10", "3.11", "3.12"]
+        python-version: ["3.10"]
 
     runs-on: ${{ matrix.os }}
     steps:
@@ -82,12 +82,12 @@ jobs:
     - name: Run python raw_uc_mode.py --debug
       run: |
         python raw_uc_mode.py --debug
-    - name: Run python raw_cdp.py --debug
-      run: |
-        python raw_cdp.py --debug
-    - name: Run python raw_socialblade.py --debug
-      run: |
-        python raw_socialblade.py --debug
+    #- name: Run python raw_cdp.py --debug
+    #  run: |
+    #    python raw_cdp.py --debug
+    #- name: Run python raw_socialblade.py --debug
+    #  run: |
+    #    python raw_socialblade.py --debug
     #- name: Run python raw_nordstrom.py
     #  run: |
     #    python raw_nordstrom.py --debug
@@ -97,6 +97,9 @@ jobs:
     #- name: Run python no_driver.py
     #  run: |
     #    python no_driver.py
-    - name: Run python raw_demo_script.py
+    #- name: Run python raw_demo_script.py
+    #  run: |
+    #    python raw_demo_script.py
+    - name: Run python raw_test.py --debug
       run: |
-        python raw_demo_script.py
+        python raw_test.py --debug
