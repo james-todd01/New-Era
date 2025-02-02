@@ -100,6 +100,6 @@ jobs:
     #- name: Run python raw_demo_script.py
     #  run: |
     #    python raw_demo_script.py
-    - name: Run python raw_test.py --debug
+    - name: Run python raw_socialblade.py --debug
       run: |
-        python raw_test.py --debug
+        python raw_socialblade.py --debug
