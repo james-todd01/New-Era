@@ -10,7 +10,7 @@ try:
     try:
         response = requests.get('https://api.ipify.org?format=json')
         ip = response.json()['ip']
-        rprint(f"Public IP address is: {ip}")
+        print(f"Public IP address is: {ip}")
     except requests.exceptions.RequestException as e:
         print(f"IP Error: {e}")
     s_text = 'The Xfinity ID you entered was incorrect. Please try again.'
