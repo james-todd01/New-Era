@@ -4,8 +4,15 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from seleniumbase import SB
+import requests
 
 try:
+    try:
+        response = requests.get('https://api.ipify.org?format=json')
+        ip = response.json()['ip']
+        rprint(f"Public IP address is: {ip}")
+    except requests.exceptions.RequestException as e:
+        print(f"IP Error: {e}")
     s_text = 'The Xfinity ID you entered was incorrect. Please try again.'
     with SB(uc=True, incognito=False) as sb:
         driver = sb.driver
@@ -16,7 +23,7 @@ try:
         time.sleep(5)
         if Button("Accept All").exists():
             click(Button("Accept All"))
-        count = 5
+        count = 10
         item = "nksilva@comcast.net"
         while count:
             try:
@@ -37,10 +44,13 @@ try:
                     driver.find_element(By.ID, 'sign_in').click()
                     time.sleep(1)
                     if driver.title == "Please reset your Xfinity password":
+                        count = 10
                         print("Inactive ID detected")
                     elif Text("Enter your password").exists():
+                        count = 10
                         print("Active ID detected")
                     elif Text(s_text).exists():
+                        count = 10
                         print("Suspicious ID detected")
                     else:
                         print("Throttling Detected")
