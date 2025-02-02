@@ -3,10 +3,10 @@ from helium import set_driver, Text, Button, click
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.keys import Keys
 from seleniumbase import SB
 
 try:
+    s_text = 'The Xfinity ID you entered was incorrect. Please try again.'
     with SB(uc=True, incognito=False) as sb:
         driver = sb.driver
         # Open the Xfinity login page (or any page you want to scrape)
@@ -24,7 +24,8 @@ try:
                     driver.get("https://login.xfinity.com/login")
                 time.sleep(2)
                 WebDriverWait(driver, 30).until(
-                    EC.presence_of_element_located((By.CSS_SELECTOR, '[tag="h1"]'))
+                    EC.presence_of_element_located(
+                        (By.CSS_SELECTOR, '[tag="h1"]'))
                 )
                 # print('Login screen updated')
                 if Button("Decline All").exists():
@@ -33,13 +34,8 @@ try:
                     username_field = driver.find_element(By.ID, 'user')
                     username_field.send_keys(item.strip())
                     time.sleep(1)
-                    # print('email id entered')
-                    # username_field.send_keys(Keys.RETURN)
-                    # screenshot_path = '/content/drive/My Drive/screenshot1.png'
-                    # driver.save_screenshot(screenshot_path)
                     driver.find_element(By.ID, 'sign_in').click()
                     time.sleep(1)
-                    s_text = 'The Xfinity ID you entered was incorrect. Please try again.'
                     if driver.title == "Please reset your Xfinity password":
                         print("Inactive ID detected")
                     elif Text("Enter your password").exists():
