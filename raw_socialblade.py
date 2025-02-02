@@ -1,4 +1,3 @@
-import os
 import time
 from helium import *
 from selenium import webdriver
@@ -6,14 +5,10 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
-from os import system
 
 from seleniumbase import SB
 
 try:
-    proxy = "http://38.242.223.235:49152"
-    bl = ("C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe")
-    user_agent='user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.5672.64 Safari/537.36"'
     with SB(uc=True, incognito=False) as sb:
         driver = sb.driver
     
